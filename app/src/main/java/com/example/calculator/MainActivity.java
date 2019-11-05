@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private String expression;
-    Button buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix,
+    Button buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix, buttonDec,
                 buttonSeven, buttonEight, buttonNine, buttonZero, buttonClear, buttonEquals,
                 buttonAdd, buttonSub, buttonMult, buttonDiv, buttonLPara, buttonRPara, buttonExpo;
 
@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final CalcModel calc = new CalcModel();
 
         expression = "";
 
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         buttonLPara = (Button)findViewById(R.id.button_leftPara);
         buttonRPara = (Button)findViewById(R.id.button_rightPara);
         buttonExpo = (Button)findViewById(R.id.button_expo);
+        buttonDec = (Button)findViewById(R.id.button_dec);
+
 
         buttonOne.setOnClickListener(
                 new View.OnClickListener() {
@@ -135,8 +139,11 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        expression += "*";
-                        updateDisplay();
+                        String temp = expression + "*";
+                        if(calc.isValid(temp)){
+                            expression += "*";
+                            updateDisplay();
+                        }
                     }
                 }
         );
@@ -144,8 +151,11 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        expression += "+";
-                        updateDisplay();
+                        String temp = expression + "+";
+                        if(calc.isValid(temp)) {
+                            expression += "+";
+                            updateDisplay();
+                        }
                     }
                 }
         );
@@ -153,8 +163,11 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        expression += "-";
-                        updateDisplay();
+                        String temp = expression + "-";
+                        if(calc.isValid(temp)){
+                            expression += "-";
+                            updateDisplay();
+                        }
                     }
                 }
         );
@@ -162,8 +175,11 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        expression += "/";
-                        updateDisplay();
+                        String temp = expression + "/";
+                        if(calc.isValid(temp)){
+                            expression += "/";
+                            updateDisplay();
+                        }
                     }
                 }
         );
@@ -180,8 +196,11 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        expression += "(";
-                        updateDisplay();
+                        String temp = expression + "(";
+                        if(calc.isValid(temp)){
+                            expression += "(";
+                            updateDisplay();
+                        }
                     }
                 }
         );
@@ -189,8 +208,11 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        expression += ")";
-                        updateDisplay();
+                        String temp = expression + ")";
+                        if(calc.isValid(temp)){
+                            expression += ")";
+                            updateDisplay();
+                        }
                     }
                 }
         );
@@ -198,8 +220,23 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        expression += "^";
-                        updateDisplay();
+                        String temp = expression + "^";
+                        if(calc.isValid(temp)){
+                            expression += "^";
+                            updateDisplay();
+                        }
+                    }
+                }
+        );
+        buttonDec.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String temp = expression + ".";
+                        if(calc.isValid(temp)){
+                            expression += ".";
+                            updateDisplay();
+                        }
                     }
                 }
         );
