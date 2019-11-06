@@ -29,7 +29,7 @@ public class CalcModel {
                 }
                 operators.pop();
             }
-            else if(expArray[i] == '+' || expArray[i] == '-' || expArray[i] == '/' || expArray[i] == '*'){
+            else if(expArray[i] == '+' || expArray[i] == '-' || expArray[i] == '/' || expArray[i] == '*' || expArray[i] == '^'){
                 while (!operators.empty() && orderOfOperations(expArray[i], operators.peek())){
                     numbers.push(doOperations(operators.pop(), numbers.pop(), numbers.pop()));
                 }
@@ -51,7 +51,14 @@ public class CalcModel {
             case '*':
                 return (val1 * val2);
             case '/':
-                return (val1 / val2);
+                if(val2 == 0){
+                    throw new ArithmeticException("Cannot divide by 0");
+                }
+                else {
+                    return (val1 / val2);
+                }
+            case '^':
+                return Math.pow(val1, val2);
         }
         return 0.0;
     }
