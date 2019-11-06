@@ -70,6 +70,9 @@ public class CalcModel {
         else if((val1 == '*' || val1 == '/') && (val2 == '+' || val2 == '-')){
             return false;
         }
+        else if(val1 == '^' && (val2 == '*' || val2 =='/')){
+            return false;
+        }
         else {
             return true;
         }
