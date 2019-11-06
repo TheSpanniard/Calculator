@@ -103,8 +103,16 @@ public class CalcModel {
             }
             for(int j = 0; j < specials.length; j++){
                 if(current == specials[j]){
-                    for(int k = 0; k < specials.length; k++){
-                        if(next == specials[k] || last == specials[k]){
+                    if(current == '.'){
+                        decCounter++;
+                    } else {
+                        decCounter = 0;
+                    }
+                    if(decCounter > 1){
+                        return false;
+                    }
+                    for (int k = 0; k < specials.length; k++) {
+                        if (next == specials[k] || last == specials[k]) {
                             return false;
                         }
                     }
