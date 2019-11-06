@@ -141,7 +141,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String temp = expression + "*";
                         if(calc.isValid(temp)){
-                            expression += "*";
+                            if(expression.equals("")){
+                                expression = "0*";
+                            } else {
+                                expression += "*";
+                            }
                             updateDisplay();
                         }
                     }
@@ -153,7 +157,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String temp = expression + "+";
                         if(calc.isValid(temp)) {
-                            expression += "+";
+                            if(expression.equals("")){
+                                expression = "0+";
+                            } else {
+                                expression += "+";
+                            }
                             updateDisplay();
                         }
                     }
@@ -165,7 +173,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String temp = expression + "-";
                         if(calc.isValid(temp)){
-                            expression += "-";
+                            if(expression.equals("")){
+                                expression = "0-";
+                            } else if (expression.charAt(expression.length()-1) == '('){
+                                expression += "0-";
+                            }
+                            else {
+                                expression += "-";
+                            }
                             updateDisplay();
                         }
                     }
@@ -177,7 +192,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String temp = expression + "/";
                         if(calc.isValid(temp)){
-                            expression += "/";
+                            if(expression.equals("")){
+                                expression = "0/";
+                            } else {
+                                expression += "/";
+                            }
                             updateDisplay();
                         }
                     }
@@ -222,7 +241,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String temp = expression + "^";
                         if(calc.isValid(temp)){
-                            expression += "^";
+                            if(expression.equals("")){
+                                expression = "0^";
+                            } else {
+                                expression += "^";
+                            }
                             updateDisplay();
                         }
                     }
@@ -234,9 +257,23 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String temp = expression + ".";
                         if(calc.isValid(temp)){
-                            expression += ".";
+                            if (expression.equals("")){
+                                expression = "0.";
+                            } else {
+                                expression += ".";
+                            }
                             updateDisplay();
                         }
+                    }
+                }
+        );
+        buttonEquals.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        double result = calc.evaluate(expression);
+                        updateResult(result);
+                        expression = "";
                     }
                 }
         );
@@ -244,5 +281,9 @@ public class MainActivity extends AppCompatActivity {
     public void updateDisplay(){
         TextView temp = (TextView)findViewById(R.id.display);
         temp.setText(expression);
+    }
+    public void updateResult(double result){
+        TextView temp = (TextView)findViewById(R.id.display);
+        temp.setText(Double.toString(result));
     }
 }
